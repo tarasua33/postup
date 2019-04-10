@@ -1,0 +1,118 @@
+<section class="system-content container classTeacher">
+  <!--FILTER-->
+  <div class="row">
+    <div class="system-content-filter">
+      <h4 class="system-content-filter-title">
+        Персональний аналіз:
+      </h4>
+      <div class="system-content-filter-subject">
+  <span class="system-content-filter-info">
+  Учень:
+  </span>
+        <button class="btnHeig" *ngIf="checkedStudent" (click)="toggleStudents()">
+          <span>{{checkedStudent.name}}</span>
+          <span class="glyphicon glyphicon-menu-down"></span>
+        </button>
+        <ul
+          class="system-content-filter-subject-listClasses showList showListName"
+          *ngIf="openListStudents"
+        >
+          <li
+            class="system-content-filter-subject-listClasses-item showList-item"
+            *ngFor="let st of students"
+            (click)="checkStudent(st)"
+          >
+            {{st.name}}
+          </li>
+        </ul>
+      </div>
+      <div class="system-content-filter-subject">
+  <span class="system-content-filter-info">
+  Семестр:
+  </span>
+        <button class="system-content-filter-subject-btn" (click)="toggleSemester()">
+          <span>{{semesters[checkedSemester]}}</span>
+          <span class="glyphicon glyphicon-menu-down"></span>
+        </button>
+        <ul
+          class="system-content-filter-subject-listClasses showList"
+          *ngIf="openListSemesters"
+        >
+          <li
+            class="system-content-filter-subject-listClasses-item showList-item"
+            (click)="checkSemester(0)"
+          >
+            {{semesters[0]}}
+          </li>
+          <li
+            class="system-content-filter-subject-listClasses-item showList-item"
+            *ngIf="year.semesters.length > 1"
+            (click)="checkSemester(1)"
+          >
+            {{semesters[1]}}
+          </li>
+          <li
+            class="system-content-filter-subject-listClasses-item showList-item"
+            *ngIf="year.semesters.length > 1"
+            (click)="checkSemester(2)"
+          >
+            {{semesters[2]}}
+          </li>
+        </ul>
+      </div>
+      <div class="system-content-filter-show" *ngIf="!isParent">
+  <span class="system-content-filter-info">
+  Клас:
+  </span>
+        <button class="system-content-filter-show-btn" *ngIf="checkedClass" (click)="toggleClasses()">
+          <span>{{checkedClass.name}}</span>
+          <span class="glyphicon glyphicon-menu-down"></span>
+        </button>
+        <ul
+          class="system-content-filter-show-listClasses showList"
+          *ngIf="openListClasses"
+        >
+          <li
+            class="system-content-filter-show-listClasses-item showList-item"
+            *ngFor = "let cl of classes"
+            (click)="checkClass(cl)"
+          >
+            {{cl.name}}
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <!--FILTER-->
+  <!--PERSONAL ANALYSIS STUDENT-->
+  <div class="analysisPersonal">
+
+    <div class="row analysisPersonal-oneStudent">
+
+      <!--MIDDLE RATING ALL SUBJECT ALL PUPILS-->
+      <div class="col-md-12">
+        <pst-middle-rate-student
+          *ngIf="isLoad"
+          [checkedStudent] = "checkedStudent"
+          [subjects] = "subjects"
+          [checkedSemester] = "checkedSemester"
+        ></pst-middle-rate-student>
+        <pst-loader *ngIf="!isLoad"></pst-loader>
+      </div>
+      <!--MIDDLE RATING ALL SUBJECT ALL PUPILS-->
+
+      <!--RATING ONE SUBJ-->
+      <div class="col-md-12">
+        <pst-graph-rate-stud-sub
+          *ngIf="isLoad"
+          [checkedStudent] = "checkedStudent"
+          [subjects] = "subjects"
+          [checkedSemester] = "checkedSemester"
+        ></pst-graph-rate-stud-sub>
+      </div>
+      <!--RATING ONE SUBJ-->
+    </div>
+
+  </div>
+  <!--PERSONAL ANALYSIS STUDENT-->
+</section>

@@ -1,0 +1,55 @@
+<div class="analysis-success card">
+  <div class="analysis-success-top card-top">
+    <h4 class="analysis-success-top-title card-top-title">Успішність</h4>
+    <div class="analysis-success-top-filter">
+        <span class="analysis-success-top-filter-info">
+        Предмет:
+        </span>
+        <button class="analysis-success-top-filter-btn" (click)="toggleSubjectsList()">
+          <span>{{getSubjectName()}}</span>
+          <span class="glyphicon glyphicon-menu-down"></span>
+          <ul
+            class="analysis-success-top-filter-listSubj showList"
+            *ngIf="openSubjects"
+          >
+            <li
+              class="analysis-success-top-filter-listSubj-item showList-item"
+              *ngFor = "let s of correctSubject"
+              (click)="checkSubject(s.key)"
+            >
+              {{s.name}}
+            </li>
+            <li
+              class="analysis-success-top-filter-listSubj-item showList-item"
+              (click)="checkSubject('00000')"
+            >
+              Всі
+            </li>
+          </ul>
+        </button>
+    </div>
+    <div class="analysis-success-top-filter">
+     <span class="analysis-success-top-filter-info">
+       Оновити:
+     </span>
+      <button class="analysis-success-top-filter-btn" (click)="updateChart()">
+        <span></span>
+        <span class="glyphicon glyphicon-refresh"></span>
+      </button>
+    </div>
+  </div>
+  <div class="analysis-success-bottom" *ngIf="isLoad">
+    <ngx-charts-pie-chart
+      [view]="[400, 250]"
+      [results]="data"
+      [explodeSlices]="false"
+      [legend]="true"
+      [legendPosition]="'below'"
+      [labels]="true"
+      [doughnut]="true"
+      [legendTitle]="'Рівні'"
+    >
+    </ngx-charts-pie-chart>
+  </div>
+  <pst-loader *ngIf="!isLoad"></pst-loader>
+</div>

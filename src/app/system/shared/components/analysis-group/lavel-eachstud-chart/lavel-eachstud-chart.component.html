@@ -1,0 +1,52 @@
+<div class="analysis-medium card">
+  <div class="analysis-medium-top card-top">
+    <h4 class="analysis-medium-top-title card-top-title">Середній бал з предметів по учнях</h4>
+    <div class="analysis-success-top-filter">
+  <span class="analysis-success-top-filter-info">
+  Предмет:
+  </span>
+      <button class="analysis-success-top-filter-btn" (click)="toggleSubjectsList()">
+        <span>{{getSubjectName()}}</span>
+        <span class="glyphicon glyphicon-menu-down"></span>
+        <ul
+          class="analysis-success-top-filter-listSubj showList"
+          *ngIf="openSubjects"
+        >
+          <li
+            class="analysis-success-top-filter-listSubj-item showList-item"
+            *ngFor="let sub of subjects"
+            (click)="checkSubject(sub.key)"
+          >
+            {{sub.name}}
+          </li>
+        </ul>
+      </button>
+    </div>
+    <div class="analysis-success-top-filter">
+     <span class="analysis-success-top-filter-info">
+       Оновити:
+     </span>
+      <button class="analysis-success-top-filter-btn" (click)="updateData()">
+        <span></span>
+        <span class="glyphicon glyphicon-refresh"></span>
+      </button>
+    </div>
+  </div>
+  <div class="analysis-medium-bottom card-bottom" *ngIf="isLoad">
+    <ngx-charts-bar-horizontal
+      [view]="[600, 500]"
+      [results]="data"
+      [scheme]="'cool'"
+      [gradient]="false"
+      [xAxis]="true"
+      [yAxis]="true"
+      [showDataLabel]="true"
+      [showXAxisLabel]="true"
+      [legend]="true"
+      [legendPosition]="'below'"
+      [legendTitle]="'Студенти'"
+      >
+    </ngx-charts-bar-horizontal>
+  </div>
+  <pst-loader *ngIf="!isLoad"></pst-loader>
+</div>

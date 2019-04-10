@@ -1,0 +1,151 @@
+<div class="parents-block card">
+  <div class="parents-block-top card-top">
+    <h4 class="parents-block-top-title card-top-title">
+      Список батьків
+    </h4>
+  </div>
+  <div class="parents-block-bottom">
+    <ul class="parents-block-bottom-listRequest">
+      <li class="parents-block-bottom-listRequest-item" *ngFor="let p of parent">
+        <div class="parents-block-bottom-listRequest-item-block">
+          <span>{{p.name}}</span>
+        </div>
+        <div class="parents-block-bottom-listRequest-item-block">
+          <span>Телефон:</span>
+          <span *ngFor="let phone of p.phone">
+            {{phone}}
+          </span>
+        </div>
+        <div
+          class="parents-block-bottom-listRequest-item-block parents-block-bottom-listRequest-item-block_add">
+          <span class="">Доступ:</span>
+          <span
+            (click)="addRightOpen(p)"
+            class="parents-block-bottom-listRequest-item-block-btn parents-block-bottom-listRequest-item-block-btn_add glyphicon glyphicon-plus"></span>
+          <span
+            (click)="deleteRightOpen(p)"
+            class="parents-block-bottom-listRequest-item-block-btn minusBtn glyphicon glyphicon-minus"></span>
+          <div class="deleteUserBlock">
+            <span>Видалити із списку батьків:</span>
+            <span
+              (click)="deleteUserOpen(p)"
+              class="parents-block-bottom-listRequest-item-block-btn minusBtn glyphicon glyphicon-trash">
+            </span>
+          </div>
+        </div>
+      </li>
+    </ul>
+    <!--<div class="paginationMy">-->
+      <!--<span class="glyphicon glyphicon-chevron-left" (click)="previous()"></span>-->
+      <!--<span>1</span>-->
+      <!--<span class="glyphicon glyphicon-chevron-right" (click)="next()"></span>-->
+    <!--</div>-->
+  </div>
+  <!--DELETE-->
+  <div class="modalContainer" *ngIf="openDeleteRight">
+    <div class="modalContainer-content">
+      <pst-loader *ngIf="!formReady"></pst-loader>
+      <form
+        *ngIf="formReady"
+        #form = "ngForm"
+        (ngSubmit)="submitDeleteRight(form)"
+        class="modalContainer-content-form"
+      >
+        <h4 class="modalContainer-content-form-title">
+          Закрити доступ до інформації учня для <span> {{checkedParent.name}} </span>
+        </h4>
+        <h4 class="modalContainer-content-form-title">
+          Виберіть учня:
+        </h4>
+        <div class="form-group" *ngIf="message.message">
+          <label class="alert alert-{{message.type}}">
+            {{message.message}}
+          </label>
+        </div>
+        <div class="form-group" *ngFor="let st of children">
+          <div class="input-group">
+            <label class="form-label-names" for="child{{st.id}}">
+              <input type="radio" id="child{{st.id}}" name="student" value="{{st.id}}" ngModel required>
+              <span>{{st.name}}</span>
+            </label>
+          </div>
+        </div>
+        <button
+          class="btn btn-success forn-modal-btn"
+          [disabled]="form.invalid"
+        >
+          Закрити дані
+        </button>
+        <button
+          (click)="deleteRightCancel()"
+          class="btn btn-warning forn-modal-btn">
+          Відхилити
+        </button>
+      </form>
+    </div>
+  </div>
+  <!--ADD-->
+  <div class="modalContainer" *ngIf="openAddRight">
+    <div class="modalContainer-content">
+      <pst-loader *ngIf="!formReady"></pst-loader>
+      <form
+        class="modalContainer-content-form"
+        #form = "ngForm"
+        (ngSubmit)="submitAddRight(form)"
+        *ngIf="formReady">
+        <h4 class="modalContainer-content-form-title">
+          Доступ до даних учня для <span> {{checkedParent.name}} </span>
+        </h4>
+        <div class="form-group" *ngIf="message.message">
+          <label class="alert alert-{{message.type}}">
+            {{message.message}}
+          </label>
+        </div>
+        <div class="form-group" *ngFor="let st of students">
+          <div class="input-group" [ngClass]="{'backgroundGreen': checkParentForChild(st)}">
+            <label class="form-label-names" for="unit{{st.id}}">
+              <input type="radio" id="unit{{st.id}}" name="student" value="{{st.id}}" ngModel required>
+              <span>{{st.name}}</span>
+            </label>
+          </div>
+        </div>
+        <button
+          type = "submit"
+          class="btn btn-success forn-modal-btn"
+          [disabled]="form.invalid"
+        >
+          Надати доступ
+        </button>
+        <button
+          (click)="addRightCancel()"
+          class="btn btn-warning forn-modal-btn"
+        >
+          Відхилити
+        </button>
+      </form>
+    </div>
+  </div>
+  <!--DELETE RIGHT USER-->
+  <div class="modalContainer" *ngIf="openDeleteParent">
+    <pst-loader *ngIf="!formReady"></pst-loader>
+    <div class="modalContainer-content" *ngIf="formReady">
+      <h4 class="modalContainer-content-form-title">
+        Підтвердіть видалення із списку батьків <span>{{checkedParent.name}}</span>
+      </h4>
+        <button
+          type = "submit"
+          class="btn btn-danger forn-modal-btn"
+          (click)="deleteParentSubmit()"
+        >
+          Видалити зі списку батьків
+        </button>
+        <button
+          (click)="deleteParentCancel()"
+          class="btn btn-warning forn-modal-btn"
+        >
+          Відхилити
+        </button>
+
+    </div>
+  </div>
+</div>

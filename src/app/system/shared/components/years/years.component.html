@@ -1,0 +1,232 @@
+<section class="system-content container classTeacher">
+  <!--FILTER-->
+  <div class="row">
+    <div class="system-content-filter">
+      <h4 class="system-content-filter-title">
+        Навчальні роки:
+      </h4>
+      <button class=" options-btn" (click)="secondSemesterAddOpen()">
+        <span>Розпочати 2-гий семестр</span>
+        <span class="glyphicon glyphicon-open"></span>
+      </button>
+      <button class=" options-btn" (click)="addYearOpen()">
+        <span>Додати Рік</span>
+        <span class="glyphicon glyphicon-plus"></span>
+      </button>
+    </div>
+  </div>
+  <!--FILTER-->
+
+  <!--YEARS-->
+  <div class="years">
+
+    <div class="row">
+
+      <!--YEARS EDITION-->
+      <div class="col-md-12">
+        <div class="years-block card">
+          <div class="years-block-top card-top">
+            <h4 class="years-block-top-title card-top-title">
+              Навчальні роки
+            </h4>
+          </div>
+          <div class="years-block-bottom">
+            <ul class="years-block-bottom-listRequest" *ngIf="years">
+              <li
+                *ngFor="let year of years"
+                [ngClass]="{'years-block-bottom-listRequest-item_actual': year['active']}"
+                class="years-block-bottom-listRequest-item">
+                <div class="years-block-bottom-listRequest-item-block">
+                  <span>Назва:</span>
+                  <span>{{year['name']}}</span>
+                </div>
+                <div
+                  class="years-block-bottom-listRequest-item-block years-block-bottom-listRequest-item-block_accept">
+                    <span
+                      class="years-block-bottom-listRequest-item-block-btn years-block-bottom-listRequest-item-block-btn_yes "
+                      (click)="editYear(year.id, 1)"
+                    >Назва</span>
+                  <span
+                    class="years-block-bottom-listRequest-item-block-btn years-block-bottom-listRequest-item-block-btn_yes "
+                    (click)="editYear(year.id, 2)"
+                  ><span *ngIf="!year.active">Активувати</span><span *ngIf="year.active">Деактивувати</span></span>
+                  <span
+                    *ngIf="year.active"
+                    class="years-block-bottom-listRequest-item-block-btn years-block-bottom-listRequest-item-block-btn_yes "
+                    (click)="editYear(year.id, 3)"
+                  >Відмінити 2 Семестр</span>
+                  <span
+                    class="years-block-bottom-listRequest-item-block-btn years-block-bottom-listRequest-item-block-btn_no"
+                    (click)="deleteYear(year.id)"
+                  >Видалити</span>
+                </div>
+              </li>
+            </ul>
+            <pst-loader *ngIf="!years"></pst-loader>
+          </div>
+          <!--EDIT-->
+          <div class="modalContainer" *ngIf="openEditYears">
+            <div class="modalContainer-content">
+              <form class="modalContainer-content-form" #form="ngForm" (ngSubmit)="submitEdit(form)">
+                <h4 class="modalContainer-content-form-title">
+                  Редагувати навчальний рік
+                </h4>
+                <div class="form-group" *ngIf="message.message">
+                  <label class="alert alert-{{message.type}}">
+                    {{message.message}}
+                  </label>
+                </div>
+                <div class="form-group" *ngIf="typeEdition === 1">
+                  <div class="input-group">
+                    <label class="form-label-names" for="nameYears">
+                      <span>Змінити назву</span>
+                    </label>
+                    <input
+                      type="text"
+                      id="nameYears"
+                      name="nameYears"
+                      [(ngModel)]="nameYearEdition"
+                      required
+                      minlength="4"
+                      class="form-control" placeholder="2019-2020">
+                  </div>
+                </div>
+                <div class="form-group" *ngIf="typeEdition === 2">
+                  <div class="input-group">
+                    <label class="form-label-names" for="makeActive">
+                      <span>
+                        Для активації даного навчально року, як поточного - виберіть дану опцію!<br>
+                        Для скасування даного навчально року, як поточного - зніміть дану опцію.
+                      </span>
+                    </label>
+                    <input
+                      type="checkbox"
+                      id="makeActive"
+                      name="makeActive"
+                      [(ngModel)]="checkedYearActive"
+                      class="form-control">
+                  </div>
+                </div>
+                <div class="form-group redBg" *ngIf="typeEdition === 3">
+                  <label class="alert alert-warning" *ngIf="!checkedYearActive">
+                    Ви можете скасовувати другий семестр тільки у активному навчальному році.
+                  </label>
+                  <div class="input-group" *ngIf="checkedYearActive">
+                    <label class="form-label-names" for="secondSemester">
+                      <span>
+                        Відмінити другий сесместр і видалити всю інформацію за другий семестр. <br>
+                        Вся уже введена інформація про другий семестр буде втрачена назавжди!
+                      </span>
+                    </label>
+                    <input
+                      type="checkbox"
+                      id="secondSemester"
+                      name="secondSemester"
+                      ngModel
+                      class="form-control">
+                  </div>
+                </div>
+                <button
+                  type = submit
+                  class="btn btn-success forn-modal-btn"
+                  [disabled]="form.invalid"
+                >Зберегти</button>
+                <button
+                  class="btn btn-warning forn-modal-btn"
+                  (click)="cancelEdit()"
+                >Відхилити
+                </button>
+              </form>
+            </div>
+          </div>
+          <div class="modalContainer" *ngIf="openDeleteYear">
+            <div class="modalContainer-content">
+              <form class="modalContainer-content-form">
+                <h4 class="modalContainer-content-form-title">
+                  Справді видалити навчальний рік <span>{{nameYearEdition}}</span>?
+                </h4>
+                <div class="form-group" *ngIf="message.message">
+                  <label class="alert alert-{{message.type}}">
+                    {{message.message}}
+                  </label>
+                </div>
+                <button class="btn btn-success forn-modal-btn" (click)="deleteYearConfirm()">
+                  Підтвердити
+                </button>
+                <button class="btn btn-warning forn-modal-btn" (click)="cancelDeleteYear()">
+                  Відхилити
+                </button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!--YEARS EDITION-->
+
+    </div>
+
+  </div>
+  <!--YEARS-->
+  <div class="modalContainer" *ngIf="openNewYear">
+    <div class="modalContainer-content">
+      <form class="modalContainer-content-form" #form="ngForm" (ngSubmit)="submitNewYear(form)" >
+        <h4 class="modalContainer-content-form-title">
+          Введіть назву нового навчального року!
+        </h4>
+        <div class="form-group" *ngIf="message.message">
+          <label class="alert alert-{{message.type}}">
+            {{message.message}}
+          </label>
+        </div>
+        <div class="form-group">
+          <div class="input-group">
+            <label class="form-label-names" for="nameYear">
+              <span>Назва</span>
+            </label>
+            <input
+              type="text"
+              id="nameYear"
+              class="form-control"
+              name = "nameNewYear"
+              ngModel
+              required
+              minlength="4"
+              placeholder="2018-2019">
+          </div>
+        </div>
+        <button class="btn btn-success forn-modal-btn" type="submit" [disabled]="form.invalid">
+          Розпочати
+        </button>
+        <button
+          class="btn btn-warning forn-modal-btn"
+          (click)="addYearCancel()"
+        >
+          Відхилити
+        </button>
+      </form>
+    </div>
+  </div>
+  <div class="modalContainer" *ngIf="openSecondSemesterAdd">
+    <div class="modalContainer-content">
+      <form class="modalContainer-content-form">
+        <h4 class="modalContainer-content-form-title" *ngIf="checkYearId">
+          Розпочати Другий Семестр у <span> {{nameYearEdition}} </span> начальному році ?
+        </h4>
+        <h4 class="modalContainer-content-form-title" *ngIf="!checkYearId">
+          Ви не можете розпочати другий семестр, якщо у вас немає визначеного активного Навчального Року!
+        </h4>
+        <div class="form-group" *ngIf="message.message">
+          <label class="alert alert-{{message.type}}">
+            {{message.message}}
+          </label>
+        </div>
+        <button class="btn btn-success forn-modal-btn" (click)="secondSemesterConfirm()" *ngIf="checkYearId">
+          Підтвердити
+        </button>
+        <button class="btn btn-warning forn-modal-btn" (click)="secondSemesterCancel()">
+          Відхилити
+        </button>
+      </form>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,59 @@
+<div class="row system-wrap-bottom">
+  <!--SIDEBAR-->
+  <aside class="system-sideBar">
+    <ul class="system-sideBar-list">
+      <li
+        routerLinkActive = "active"
+        [routerLink]="['/system','teacher','list-students']"
+        class="system-sideBar-list-item">
+        <span class="glyphicon glyphicon-list"></span>
+        <span class="system-sideBar-list-item-subs">
+                                Список учнів
+                            </span>
+      </li>
+      <li
+        routerLinkActive = "active"
+        [routerLink]="['/system','teacher','register']"
+        class="system-sideBar-list-item">
+        <span class="glyphicon glyphicon-list-alt"></span>
+        <span class="system-sideBar-list-item-subs">
+                                Журнал
+                            </span>
+      </li>
+      <li
+        routerLinkActive = "active"
+        [routerLink]="['/system','teacher','analysis-group']"
+        class="system-sideBar-list-item">
+        <span class="glyphicon glyphicon-stats"></span>
+        <span class="system-sideBar-list-item-subs">
+                                Аналіз класу
+                            </span>
+      </li>
+      <li
+        routerLinkActive = "active"
+        [routerLink]="['/system','teacher','analysis-personal']"
+        class="system-sideBar-list-item">
+        <span class="glyphicon glyphicon-signal"></span>
+        <span class="system-sideBar-list-item-subs">
+                                Аналіз особистий
+                            </span>
+      </li>
+      <li
+        routerLinkActive = "active"
+        [routerLink]="['/system','teacher','parent-access']"
+        class="system-sideBar-list-item system-sideBar-list-item_info">
+        <span class="glyphicon glyphicon-bell"></span>
+        <span class="system-sideBar-list-item-subs">
+                                Доступ батьків
+                        </span>
+        <span class="system-sideBar-list-item-circle"></span>
+      </li>
+    </ul>
+  </aside>
+  <!--SIDEBAR-->
+
+  <!--CONTENT-ADMINISTRATION-->
+  <router-outlet></router-outlet>
+  <!--CONTENT-ADMINISTRATION-->
+
+</div>

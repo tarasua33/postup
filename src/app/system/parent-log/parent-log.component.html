@@ -1,0 +1,31 @@
+<div class="row system-wrap-bottom">
+  <!--SIDEBAR-->
+  <aside class="system-sideBar">
+    <ul class="system-sideBar-list">
+      <li
+        routerLinkActive = "active"
+        [routerLink]="['/system','parent','register']"
+        class="system-sideBar-list-item">
+        <span class="glyphicon glyphicon-list-alt"></span>
+        <span class="system-sideBar-list-item-subs">
+                                Журнал
+                            </span>
+      </li>
+      <li
+        routerLinkActive = "active"
+        [routerLink]="['/system','parent','analysis-personal']"
+        class="system-sideBar-list-item">
+        <span class="glyphicon glyphicon-signal"></span>
+        <span class="system-sideBar-list-item-subs">
+                                Аналіз особистий
+                            </span>
+      </li>
+    </ul>
+  </aside>
+  <!--SIDEBAR-->
+
+  <!--CONTENT-ADMINISTRATION-->
+  <router-outlet></router-outlet>
+  <!--CONTENT-ADMINISTRATION-->
+
+</div>

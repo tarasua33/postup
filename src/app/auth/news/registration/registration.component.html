@@ -1,0 +1,125 @@
+<div class="modalContainer">
+  <div class="modalContainer-content">
+    <pst-loader *ngIf="!formReady"></pst-loader>
+    <form
+      class="modalContainer-content-form"
+      *ngIf="formReady"
+      [formGroup]="form"
+      (ngSubmit)="onSubmit(form)" >
+      <h4 class="modalContainer-content-form-title">
+        Реєстрація
+        <a [routerLink]="['/news']" class=" modalContainer-content-form-close modalContainer-content-form-link">
+                            <span class="glyphicon glyphicon-remove">
+                            </span>
+        </a>
+      </h4>
+
+      <div class="form-group has-error" [ngClass]="{'has-error': form.controls['email'].touched && form.controls['email'].invalid}">
+        <label for="emailR">
+          Електронна пошта
+        </label>
+        <input
+          formControlName="email"
+          type="email"
+          placeholder="email@gmail.com"
+          id="emailR"
+          class="form-control">
+        <span *ngIf="form.controls['email'].touched && form.controls['email'].invalid" class="hasError">
+          Введіть коректну електронну пошту.
+        </span>
+        <span *ngIf="form.controls['email'].touched && form.controls['email'].errors && form.controls['email'].errors['emailIsUsed']" class="hasError">
+          Дана електронна пошта вже використовується.
+        </span>
+      </div>
+      <div class="form-group" [ngClass]="{'has-error': form.controls['password'].touched && form.controls['password'].invalid}">
+        <label for="pwd">
+          Пароль
+        </label>
+        <input
+          formControlName="password"
+          type="password"
+          placeholder="password"
+          id="pwd"
+          class="form-control">
+        <span *ngIf="form.controls['password'].touched && form.controls['password'].errors && form.controls['password'].errors['required']" class="hasError">
+          Введіть пароль
+        </span>
+        <span *ngIf="form.controls['password'].touched && form.controls['password'].errors && form.controls['password'].errors['minlength']" class="hasError">
+          Кількість символів у паролі повинна бути не менше
+          <b>{{form.controls['password'].errors['minlength']['requiredLength']}}</b>
+          зараз
+          <b>{{form.controls['password'].errors['minlength']['actualLength']}}</b>
+        </span>
+      </div>
+      <div class="form-group" [ngClass]="{'has-error': form.controls['name'].touched && form.controls['name'].invalid}">
+        <label for="nameParent">
+          Прізвище/Ім'я/По батькові (повністю)
+        </label>
+        <input
+          formControlName="name"
+          type="text"
+          id="nameParent"
+          class="form-control"
+          placeholder="Никодименко Никодим Никодимович"
+        >
+        <span *ngIf="form.controls['name'].touched && form.controls['name'].errors && form.controls['name'].errors['required']" class="hasError">
+          Введіть ім'я
+        </span>
+        <span *ngIf="form.controls['name'].touched && form.controls['name'].errors && form.controls['name'].errors['minlength']" class="hasError">
+          Кількість символів в імені повинна бути не менше
+          <b>{{form.controls['name'].errors['minlength']['requiredLength']}}</b>
+          зараз
+          <b>{{form.controls['name'].errors['minlength']['actualLength']}}</b>
+        </span>
+      </div>
+      <div class="form-group" [ngClass]="{'has-error': form.controls['type'].touched && form.controls['type'].invalid}">
+        <label for="typeRegister">
+          Тип реєстрації
+        </label>
+        <select
+          formControlName="type"
+          name="typeRegister"
+          id="typeRegister"
+          class="form-control"
+        >
+          <option value="teacher">Вчитель</option>
+          <option value="parent">Батько/Мати</option>
+        </select>
+        <span *ngIf="form.controls['type'].touched && form.controls['type'].invalid" class="hasError">
+          Виберіть тип
+        </span>
+      </div>
+      <div class="form-group" [ngClass]="{'has-error': form.controls['right'].touched && form.controls['right'].invalid}">
+        <div class="input-group">
+          <label class="" for="right">
+            Я даю згоду на опрацювання моїх персональних даних
+          </label>
+          <input formControlName="right" type="checkbox" id="right" class="">
+          <span *ngIf="form.controls['right'].touched && form.controls['right'].invalid" class="hasError">
+            Для реєстрації потрібно погодитись із даною умовою
+          </span>
+        </div>
+      </div>
+      <div class="form-group" [ngClass]="{'has-error': form.controls['phone'].touched && form.controls['phone'].invalid}">
+        <label for="contacts">
+          Телефонний номер
+        </label>
+        <input formControlName="phone" type="number" id="contacts" class="form-control" placeholder="(ххх)хх хх ххх">
+        <span *ngIf="form.controls['phone'].touched && form.controls['phone'].errors && form.controls['phone'].errors['required']" class="hasError">
+          Введіть номер телефону
+        </span>
+      </div>
+      <div class="form-group" *ngIf="message.message">
+        <label class="alert alert-{{message.type}}">
+          {{message.message}}
+        </label>
+      </div>
+      <button
+        type="submit"
+        class="btn btn-primary"
+        [disabled]="form.invalid"
+      >Зареєструватись</button>
+      <a [routerLink]="['/news/login']" class="modalContainer-content-form-link modalContainer-content-form-change">Залогінитись</a>
+    </form>
+  </div>
+</div>

@@ -1,0 +1,572 @@
+{
+  "users": [
+    {
+      "id": 1,
+      "email": "test@gmail.com",
+      "password": "12345678",
+      "access": [
+        2,
+        5
+      ],
+      "name": "Адмін",
+      "type": [
+        "teacher",
+        "principal",
+        "parent"
+      ],
+      "phone": [
+        "3333333333"
+      ],
+      "classes": [
+        11,
+        12
+      ],
+      "subjects": [
+        {
+          "class": 9,
+          "subject": 5
+        },
+        {
+          "class": 9,
+          "subject": 6
+        },
+        {
+          "class": 11,
+          "subject": 6
+        }
+      ],
+      "confirm": true
+    },
+    {
+      "email": "test3@gmail.com",
+      "password": "11111111",
+      "access": [],
+      "name": "Юрченко Юлія Юрійовна",
+      "type": [
+        "teacher",
+        "parent"
+      ],
+      "phone": [
+        121212
+      ],
+      "classes": [
+        9
+      ],
+      "confirm": true,
+      "subjects": [
+        {
+          "class": 9,
+          "subject": 5
+        },
+        {
+          "class": 10,
+          "subject": 7
+        }
+      ],
+      "id": 2
+    },
+    {
+      "email": "test5@gmail.com",
+      "password": "111111",
+      "name": "Юрченко Юзя Юрійович",
+      "type": [
+        "teacher"
+      ],
+      "phone": [
+        1212
+      ],
+      "classes": [
+        9,
+        10
+      ],
+      "confirm": true,
+      "subjects": [
+        {
+          "class": 15,
+          "subject": 5
+        },
+        {
+          "class": 9,
+          "subject": 9
+        }
+      ],
+      "id": 3,
+      "access": []
+    },
+    {
+      "email": "test1@gmail.com",
+      "password": "111111",
+      "name": "Кирченко Батько",
+      "type": [
+        "parent"
+      ],
+      "phone": [
+        234234234
+      ],
+      "classes": [],
+      "confirm": true,
+      "access": [
+        1,
+        2
+      ],
+      "subjects": [],
+      "id": 4
+    },
+    {
+      "email": "test2@gmail.com",
+      "password": "111111",
+      "name": "Кирченко Мати",
+      "type": [
+        "parent"
+      ],
+      "phone": [
+        234234234
+      ],
+      "classes": [],
+      "confirm": true,
+      "access": [
+        2,
+        1
+      ],
+      "subjects": [],
+      "id": 5
+    },
+    {
+      "email": "test4@gmail.com",
+      "password": "111111",
+      "name": "Марійченко Батько",
+      "type": [
+        "parent"
+      ],
+      "phone": [
+        234234234
+      ],
+      "classes": [],
+      "confirm": true,
+      "access": [
+        3,
+        5
+      ],
+      "subjects": [],
+      "id": 6
+    },
+    {
+      "email": "test6@gmail.com",
+      "password": "111111",
+      "name": "Вчитель Класний",
+      "type": [
+        "teacher"
+      ],
+      "phone": [
+        234324
+      ],
+      "classes": [
+        11
+      ],
+      "confirm": true,
+      "access": [],
+      "subjects": [],
+      "id": 7
+    },
+    {
+      "email": "test7@gmail.com",
+      "password": "111111",
+      "name": "Вчитель Предмету",
+      "type": [
+        "teacher"
+      ],
+      "phone": [
+        111111
+      ],
+      "classes": [
+        12
+      ],
+      "confirm": true,
+      "access": [],
+      "subjects": [
+        {
+          "class": 11,
+          "subject": 7
+        },
+        {
+          "class": 11,
+          "subject": 9
+        }
+      ],
+      "id": 8
+    },
+    {
+      "email": "test11@gmail.com",
+      "password": "111111",
+      "name": "Хабіб Хабібченко",
+      "type": [
+        "parent"
+      ],
+      "phone": [
+        132123
+      ],
+      "classes": [],
+      "confirm": false,
+      "access": [],
+      "subjects": [],
+      "id": 9
+    }
+  ],
+  "subjects": [
+    {
+      "key": "23364",
+      "name": "Економіка для всіх",
+      "id": 6
+    },
+    {
+      "key": "88859",
+      "name": "Трудове навчання",
+      "id": 7
+    },
+    {
+      "key": "53443",
+      "name": "Хімія",
+      "id": 9
+    },
+    {
+      "key": "53092",
+      "name": "Англіська Мова",
+      "id": 10
+    }
+  ],
+  "classes": [
+    {
+      "key": "97923",
+      "year": 3,
+      "name": "11-а",
+      "subjects": [
+        "23364",
+        "53092",
+        "53443",
+        "88859",
+        "98765"
+      ],
+      "students": [
+        1,
+        2,
+        3
+      ],
+      "id": 11
+    },
+    {
+      "key": "34582",
+      "year": 3,
+      "name": "9-а",
+      "subjects": [
+        "53092",
+        "53443",
+        "88859"
+      ],
+      "students": [
+        5
+      ],
+      "id": 12
+    }
+  ],
+  "years": [
+    {
+      "name": "2020-2022",
+      "active": false,
+      "semesters": [
+        {
+          "name": "Перший"
+        }
+      ],
+      "id": 2
+    },
+    {
+      "name": "2017-2019",
+      "active": true,
+      "semesters": [
+        {
+          "name": "Перший"
+        },
+        {
+          "name": "Другий"
+        }
+      ],
+      "id": 3
+    }
+  ],
+  "students": [
+    {
+      "name": "тарасенко Тарас тарасович",
+      "contacts": [
+        234
+      ],
+      "place": "Жмеринка",
+      "date": "2016-07-07",
+      "register": [
+        {
+          "subject": "23364",
+          "semesterOne": {
+            "rates": [
+              6
+            ],
+            "final": 6
+          },
+          "semesterSecond": {
+            "rates": [
+              12
+            ],
+            "final": 12
+          }
+        },
+        {
+          "subject": "53092",
+          "semesterOne": {
+            "rates": [],
+            "final": 0
+          },
+          "semesterSecond": {
+            "rates": [],
+            "final": 0
+          }
+        },
+        {
+          "subject": "53443",
+          "semesterOne": {
+            "rates": [
+              8
+            ],
+            "final": 8
+          },
+          "semesterSecond": {
+            "rates": [
+              4
+            ],
+            "final": 4
+          }
+        },
+        {
+          "subject": "88859",
+          "semesterOne": {
+            "rates": [],
+            "final": 0
+          },
+          "semesterSecond": {
+            "rates": [],
+            "final": 0
+          }
+        },
+        {
+          "subject": "98765",
+          "semesterOne": {
+            "rates": [],
+            "final": 0
+          },
+          "semesterSecond": {
+            "rates": [],
+            "final": 0
+          }
+        }
+      ],
+      "parents": [],
+      "id": 1
+    },
+    {
+      "name": "Стефанюк Стефанія Стефанівна",
+      "contacts": [
+        2344
+      ],
+      "place": "Акапулько",
+      "date": "2017-06-16",
+      "register": [
+        {
+          "subject": "23364",
+          "semesterOne": {
+            "rates": [
+              3
+            ],
+            "final": 3
+          },
+          "semesterSecond": {
+            "rates": [
+              12
+            ],
+            "final": 12
+          }
+        },
+        {
+          "subject": "53092",
+          "semesterOne": {
+            "rates": [],
+            "final": 0
+          },
+          "semesterSecond": {
+            "rates": [],
+            "final": 0
+          }
+        },
+        {
+          "subject": "53443",
+          "semesterOne": {
+            "rates": [
+              9
+            ],
+            "final": 9
+          },
+          "semesterSecond": {
+            "rates": [
+              4
+            ],
+            "final": 4
+          }
+        },
+        {
+          "subject": "88859",
+          "semesterOne": {
+            "rates": [],
+            "final": 0
+          },
+          "semesterSecond": {
+            "rates": [],
+            "final": 0
+          }
+        },
+        {
+          "subject": "98765",
+          "semesterOne": {
+            "rates": [],
+            "final": 0
+          },
+          "semesterSecond": {
+            "rates": [],
+            "final": 0
+          }
+        }
+      ],
+      "parents": [],
+      "id": 2
+    },
+    {
+      "name": "Попович Павло Пупкович",
+      "contacts": [
+        234234234234
+      ],
+      "place": "Токіо",
+      "date": "2015-01-06",
+      "register": [
+        {
+          "subject": "23364",
+          "semesterOne": {
+            "rates": [
+              12
+            ],
+            "final": 12
+          },
+          "semesterSecond": {
+            "rates": [
+              12
+            ],
+            "final": 12
+          }
+        },
+        {
+          "subject": "53092",
+          "semesterOne": {
+            "rates": [],
+            "final": 0
+          },
+          "semesterSecond": {
+            "rates": [],
+            "final": 0
+          }
+        },
+        {
+          "subject": "53443",
+          "semesterOne": {
+            "rates": [
+              6
+            ],
+            "final": 6
+          },
+          "semesterSecond": {
+            "rates": [
+              4
+            ],
+            "final": 4
+          }
+        },
+        {
+          "subject": "88859",
+          "semesterOne": {
+            "rates": [],
+            "final": 0
+          },
+          "semesterSecond": {
+            "rates": [],
+            "final": 0
+          }
+        },
+        {
+          "subject": "98765",
+          "semesterOne": {
+            "rates": [],
+            "final": 0
+          },
+          "semesterSecond": {
+            "rates": [],
+            "final": 0
+          }
+        }
+      ],
+      "parents": [],
+      "id": 3
+    },
+    {
+      "name": "Іванчук Іван Іванович",
+      "contacts": [
+        234423423
+      ],
+      "place": "Київ",
+      "date": "2014-06-11",
+      "register": [
+        {
+          "subject": "53092",
+          "semesterOne": {
+            "rates": [],
+            "final": 0
+          },
+          "semesterSecond": {
+            "rates": [],
+            "final": 0
+          }
+        },
+        {
+          "subject": "53443",
+          "semesterOne": {
+            "rates": [
+              7
+            ],
+            "final": 7
+          },
+          "semesterSecond": {
+            "rates": [
+              8
+            ],
+            "final": 8
+          }
+        },
+        {
+          "subject": "88859",
+          "semesterOne": {
+            "rates": [],
+            "final": 0
+          },
+          "semesterSecond": {
+            "rates": [],
+            "final": 0
+          }
+        }
+      ],
+      "parents": [],
+      "id": 5
+    }
+  ]
+}

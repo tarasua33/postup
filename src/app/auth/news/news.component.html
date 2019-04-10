@@ -1,0 +1,42 @@
+<div class="news">
+  <div class="container">
+    <div class="row news-top">
+    </div>
+    <div class="row news-bottom">
+      <article class="news-bottom-card col-sm-12 col-sm-6 col-md-4">
+        <div class="news-bottom-card-container">
+          <div class="news-bottom-card-top">
+            <div class="news-bottom-card-top-system">
+              <span class="news-bottom-card-top-system-options" [routerLink]="['/news/login']">
+                <span class="iconsStandard glyphicon glyphicon-log-in"></span>
+              </span>
+              <span class="news-bottom-card-top-system-new">New</span>
+            </div>
+            <div class="news-bottom-card-top-img">
+              <img src="https://placeimg.com/350/250/arch" alt="Школа новини, події" class="news-bottom-card-top-img-pic">
+            </div>
+          </div>
+          <div class="">
+            <h4 class="news-bottom-card-down-title">
+              Ви знаходитесь на стартовій сторінці Електронної системи
+              аналізу успішності учнів - ПОСТУП
+            </h4>
+            <p class="news-bottom-card-down-text">
+              Для користування системою, Вам необхідно зареєструватись. Зареєструвавшись, звеніться до адміністрації системи
+              щоб активувати Ваш обліковий запис. Після активації - Ви зможете ввійти в систему, використовуючи
+              Ваш логін і пароль.
+            </p>
+            <span class="news-bottom-card-down-date">
+            </span>
+          </div>
+          <div class="news-bottom-card-reade">
+            <a [routerLink]="['/news/registration']" class="news-bottom-card-reade-btn">
+              Реєстрація
+            </a>
+          </div>
+        </div>
+      </article>
+    </div>
+  </div>
+</div>
+<router-outlet></router-outlet>

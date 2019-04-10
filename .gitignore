@@ -36,4 +36,10 @@ testem.log
 
 # System Files
 .DS_Store
-Thumbs.db
+Thumbs.db 
+
+/.idea
+node_modules
+
+/.firebase
+/dist

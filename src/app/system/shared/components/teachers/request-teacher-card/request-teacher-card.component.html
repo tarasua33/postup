@@ -1,0 +1,75 @@
+<div class="parents-block card">
+  <div class="parents-block-top card-top">
+    <h4 class="parents-block-top-title card-top-title">
+      Запити на реєстрацію
+    </h4>
+  </div>
+  <div class="parents-block-bottom">
+    <ul class="parents-block-bottom-listRequest">
+      <li class="parents-block-bottom-listRequest-item" *ngFor="let t of unconfirmedTeachers">
+        <div class="parents-block-bottom-listRequest-item-block">
+          <span>{{t.name}}</span>
+        </div>
+        <div class="parents-block-bottom-listRequest-item-block">
+          <span>{{t.phone}}</span>
+        </div>
+        <div
+          class="parents-block-bottom-listRequest-item-block parents-block-bottom-listRequest-item-block_accept">
+          <span
+            class="parents-block-bottom-listRequest-item-block-btn parents-block-bottom-listRequest-item-block-btn_yes "
+            (click)="confirmTeacherOpen(t.id)"
+          >
+            Підтвердити
+          </span>
+          <span
+            class="parents-block-bottom-listRequest-item-block-btn parents-block-bottom-listRequest-item-block-btn_no"
+            (click)="confirmDeleteTeacherOpen(t.id)"
+          >
+            Відхилити
+          </span>
+        </div>
+      </li>
+    </ul>
+  </div>
+</div>
+<!--Delete-->
+<div class="modalContainer" *ngIf="openDeleteTeacher">
+  <div class="modalContainer-content">
+    <form class="modalContainer-content-form">
+      <h4 class="modalContainer-content-form-title">
+        Видалити запит на реєстрацію <span class="bgRed"> {{checkedTeacher.name}} </span> ? <br>
+        Всю інформацію про цього користувача буде втрачено назавжди.
+      </h4>
+      <button
+        class="btn btn-success forn-modal-btn"
+        type = submit
+        (click)="deleteTeacherSubmit()"
+      >
+        Видалити
+      </button>
+      <button class="btn btn-warning forn-modal-btn" (click)="deleteTeacherCancel()">
+        Ще подумаю
+      </button>
+    </form>
+  </div>
+</div>
+<!--Confirm-->
+<div class="modalContainer" *ngIf="openConfirmTeacher">
+  <div class="modalContainer-content">
+    <form class="modalContainer-content-form">
+      <h4 class="modalContainer-content-form-title">
+        Підтвердити запит на реєстрацію <span class="bgRed"> {{checkedTeacher.name}} </span> ? <br>
+      </h4>
+      <button
+        class="btn btn-success forn-modal-btn"
+        type = submit
+        (click)="confirmTeacherSubmit()"
+      >
+        Підтвердити
+      </button>
+      <button class="btn btn-warning forn-modal-btn" (click)="confirmTeacherCancel()">
+        Ще подумаю
+      </button>
+    </form>
+  </div>
+</div>

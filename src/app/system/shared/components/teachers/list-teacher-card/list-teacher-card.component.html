@@ -1,0 +1,95 @@
+<div class="teachers-block card">
+  <div class="teachers-block-top card-top">
+    <h4 class="teachers-block-top-title card-top-title">
+      Управління викладанням предметів по класах
+    </h4>
+  </div>
+  <div class="teachers-block-bottom">
+    <ul class="teachers-block-bottom-list">
+      <li class="teachers-block-bottom-list-item" *ngFor="let t of teachers">
+        <div class="teachers-block-bottom-list-item-block">
+          <span>{{getShortName(t.name)}}</span>
+        </div>
+        <div class="teachers-block-bottom-list-item-block">
+          <span>{{t.phone}}</span>
+        </div>
+        <div class="teachers-block-bottom-list-item-block">
+          <div class="wrapper-for-item" *ngFor="let sub of t.subjects">
+            <div class="teachers-block-bottom-list-item-block-subjectItem" *ngIf="getClassName(sub)">
+              <div class="teachers-block-bottom-list-item-block-subjectItem-partClass">
+                {{getClassName(sub)}}
+              </div>
+              <div class="teachers-block-bottom-list-item-block-subjectItem-partName">
+                {{getSubjectName(sub)}}
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="teachers-block-bottom-list-item-block teachers-block-bottom-list-item-block_add">
+          <span class="">Редагувати:</span>
+          <span (click)="addSubjectOpen(t.id)"
+            class="teachers-block-bottom-list-item-block-btn teachers-block-bottom-list-item-block-btn_add glyphicon glyphicon-edit"></span>
+        </div>
+      </li>
+    </ul>
+  </div>
+</div>
+<div class="modalContainer" *ngIf="openCardAddSubject">
+  <div class="modalContainer-content">
+    <h4 class="modalContainer-content-form-title">
+      Редагувати предмети, які викладає <span> {{getShortName(checkedTeacher.name)}}</span>
+    </h4>
+    <div class="form-group" *ngIf="message.message">
+      <label class="alert alert-{{message.type}}">
+        {{message.message}}
+      </label>
+    </div>
+    <form class="modalContainer-content-form" #form = "ngForm" (ngSubmit)="addSubjectSubmit(form)">
+      <div class="form-group">
+        <label class="form-label-names" for="classNew">
+          Виберіть клас:
+        </label>
+        <select class="form-control" ngModel name="class" required id="classNew">
+          <option value="{{c.id}}" *ngFor="let c of classes">{{c.name}}</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label class="form-label-names" for="subjectNew">
+          Виберіть предмет:
+        </label>
+        <select class="form-control" ngModel name="subject" required id="subjectNew">
+          <option value="{{s.id}}" *ngFor="let s of subjects">{{s.name}}</option>
+        </select>
+      </div>
+      <button
+        class="btn btn-primary"
+        [disabled]="form.invalid"
+        type = "submit"
+      >
+        <span class="glyphicon glyphicon-plus-sign"></span>
+        Додати
+      </button>
+      <button class="btn btn-warning forn-modal-btn" (click)="addSubjectCancel()">Завершити</button>
+    </form>
+    <hr>
+    <h4 class="modalContainer-content-form-title bgGreen">
+      Предмети, які вже викладаються вчителем.
+    </h4>
+    <div class="wrapper-for-item wrapper-for-item-form bgGreen" *ngFor="let sub of checkedTeacher.subjects">
+      <div class="" *ngIf="getClassName(sub)">
+        <div class="part-item">
+          {{getClassName(sub)}}
+        </div>
+        <div class="part-item">
+          {{getSubjectName(sub)}}
+        </div>
+        <div class="part-item-del">
+          <span
+            (click)="deleteSubject(sub)"
+            class="form-plus form-plus_delete glyphicon glyphicon-minus-sign"
+          ></span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,43 @@
+<div class="parents-block card">
+  <div class="parents-block-top card-top">
+    <h4 class="parents-block-top-title card-top-title">
+      Запити на реєстрацію
+    </h4>
+  </div>
+  <div class="parents-block-bottom">
+    <ul class="parents-block-bottom-listRequest">
+      <li class="parents-block-bottom-listRequest-item" *ngFor="let par of notconfirmedParent">
+        <div class="parents-block-bottom-listRequest-item-block">
+          <span>Ім'я:</span>
+          <span>{{par.name}}</span>
+        </div>
+        <div class="parents-block-bottom-listRequest-item-block">
+          <span>Телефон:</span>
+          <span *ngFor="let phone of par.phone">{{phone}}</span>
+        </div>
+        <div
+          class="parents-block-bottom-listRequest-item-block parents-block-bottom-listRequest-item-block_accept">
+          <span
+            (click)="acceptParent(par)"
+            class="parents-block-bottom-listRequest-item-block-btn parents-block-bottom-listRequest-item-block-btn_yes ">Підтвердити</span>
+          <span
+            (click)="deleteParent(par)"
+            class="parents-block-bottom-listRequest-item-block-btn parents-block-bottom-listRequest-item-block-btn_no">Відхилити</span>
+        </div>
+      </li>
+    </ul>
+  </div>
+  <div class="modalContainer" style="display:none;">
+    <div class="modalContainer-content">
+      <form class="modalContainer-content-form">
+        <h4 class="modalContainer-content-form-title form-modal-title">
+          Підтвердіть дію -
+          <span class="form-modal-title-action">Підтвердити реєстрацію</span>
+          <span class="form-modal-title-parent">Миколаєнко Миколай Миколайович</span>
+        </h4>
+        <button class="btn btn-success forn-modal-btn">Підтвердити</button>
+        <button class="btn btn-warning forn-modal-btn">Ще подумаю</button>
+      </form>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,210 @@
+<div class="classTeacher-scrollWrapper">
+  <div class="classTeacher-list">
+    <ul class="classTeacher-list-table">
+      <li class="classTeacher-list-table-itemT">
+        <div class="classTeacher-list-table-itemT-name">
+          Ім'я
+        </div>
+        <div class="classTeacher-list-table-itemT-date">
+          Дата народження
+        </div>
+        <div class="classTeacher-list-table-itemT-place">
+          Місце проживання
+        </div>
+        <div class="classTeacher-list-table-itemT-parent">
+          Батьки
+        </div>
+        <div class="classTeacher-list-table-itemT-contacts">
+          Контакти
+        </div>
+        <div class="classTeacher-list-table-itemT-success">
+          Успішність
+        </div>
+        <div class="classTeacher-list-table-itemT-edit">
+          Ред.
+        </div>
+      </li>
+      <li class="classTeacher-list-table-itemD"  *ngFor="let st of students">
+        <div class="classTeacher-list-table-itemD-name">
+          {{st.name}}
+        </div>
+        <div class="classTeacher-list-table-itemD-date">
+          {{st.date}}
+        </div>
+        <div class="classTeacher-list-table-itemD-place">
+          {{st.place}}
+        </div>
+        <div class="classTeacher-list-table-itemD-parent">
+          {{getNameParents(st)}}
+        </div>
+        <div class="classTeacher-list-table-itemD-contacts">
+          <span class="classTeacher-list-table-itemD-contacts-item" *ngFor="let con of st.contacts">
+            {{con}}
+          </span>
+        </div>
+        <div class="classTeacher-list-table-itemD-success">
+          <div class="classTeacher-list-table-itemD-success-bar">
+            <div class="classTeacher-list-table-itemD-success-bar-progress" [ngStyle]="{'width': getRating(st) + '%'}">
+                <span>
+                {{getRating(st)}}
+                </span>
+            </div>
+          </div>
+          <span class="classTeacher-list-table-itemD-success-percent">
+            {{getRating(st)}}
+          </span>
+        </div>
+        <div class="classTeacher-list-table-itemD-edit">
+          <span class="glyphicon glyphicon-option-vertical"></span>
+          <div class="classTeacher-list-table-itemD-edit-wrap">
+            <ul class="editMenu">
+              <li class="editMenu-item" (click)="editStudentOpen(st.id)">
+                <span class="glyphicon glyphicon-pencil"></span>
+              </li>
+              <li class="editMenu-item" (click)="changeClassOpen(st.id)">
+                <span class="glyphicon glyphicon-share"></span>
+              </li>
+              <li class="editMenu-item" (click)="deleteStudentOpen(st.id)">
+                <span class="glyphicon glyphicon-trash"></span>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </li>
+    </ul>
+  </div>
+</div>
+<!--EDIT-->
+<div class="modalContainer" *ngIf="openEditStudent">
+  <div class="modalContainer-content">
+    <form
+      class="modalContainer-content-form"
+      #form="ngForm"
+      (ngSubmit)="editStudentSubmit(form)"
+      *ngIf="formReady"
+    >
+      <h4 class="modalContainer-content-form-title">
+        Редагувати учня {{checkedStudent.name}}
+      </h4>
+      <div class="form-group">
+        <label for="SurNamePupilsEd">
+          Повне ім'я
+        </label>
+        <input
+          type="text"
+          name = "name"
+          id="SurNamePupilsEd"
+          class="form-control"
+          required
+          [ngModel]="checkedStudent.name"
+        >
+      </div>
+      <div class="form-group">
+        <label for="dateBirthEd">
+          Дата народження
+        </label>
+        <input
+          type="date"
+          id="dateBirthEd"
+          name = "date"
+          required
+          [ngModel]="checkedStudent.date"
+          class="form-control"
+        >
+      </div>
+      <div class="form-group">
+        <label for="homeTownEd">
+          Місце проживання
+        </label>
+        <input
+          required
+          type="text"
+          id="homeTownEd"
+          class="form-control"
+          name="place"
+          [ngModel]="checkedStudent.place"
+        >
+      </div>
+      <div class="form-group" *ngFor="let c of checkedStudent.contacts; let i = index">
+        <label for="newNumberEd+{{i}}">
+          Контакти
+        </label>
+        <input
+          type="number"
+          id="newNumberEd+{{i}}"
+          class="form-control"
+          value="{{checkedStudent.contacts[i]}}"
+        >
+        <input
+          type="button"
+          (click)="deletePhone(i)"
+          value="Видалити"
+          class="form-control modalContainer-content-form-addContact"
+        >
+      </div>
+      <div class="form-group">
+        <label for="newPhone"></label>
+        <input
+          type="number"
+          id="newPhone"
+          [(ngModel)]="newPhone"
+          [ngModelOptions]="{standalone: true}"
+          class="form-control"
+        >
+        <input
+          (click)="addPhone()"
+          type="button"
+          value="Додати"
+          class="form-control modalContainer-content-form-addContact"
+        >
+      </div>
+      <div class="form-group" *ngIf="message.message">
+        <label class="alert alert-{{message.type}}">
+          {{message.message}}
+        </label>
+      </div>
+      <button type="submit" [disabled]="form.invalid" class="btn btn-primary">Зберегти зміни</button>
+      <button class="btn btn-danger" (click)="editStudentCancel()">Відмінити</button>
+    </form>
+  </div>
+</div>
+<!--DELETE-->
+<div class="modalContainer" *ngIf="openDeleteStudent">
+  <div class="modalContainer-content" *ngIf="formReady">
+    <h4 class="modalContainer-content-ask">
+      Підтрердіть видалення учня <span> {{checkedStudent.name}} </span> із системи.
+    </h4>
+    <button class="btn btn-danger modalContainer-content-btn modalContainer-content-btn_yes" (click)="deleteStudentSubmit()">
+      Видалити
+    </button>
+    <button class="btn-warning btn modalContainer-content-btn modalContainer-content-btn_no" (click)="deleteStudentCancel()">
+      Відмінити
+    </button>
+  </div>
+</div>
+<!--CHANGE CLASS-->
+<div class="modalContainer" *ngIf="openChangeClass">
+  <div class="modalContainer-content">
+    <form class="modalContainer-content-form"
+          *ngIf="formReady"
+          #form="ngForm"
+          (ngSubmit)="changeClassSubmit(form)">
+      <h4 class="modalContainer-content-form-title">
+        Перевести учня {{checkedStudent.name}}  в інший клас
+      </h4>
+      <div class="form-group">
+        <label for="newClass">Виберіть новий клас</label>
+        <select name="newClass" id="newClass" ngModel required class="form-control">
+          <option value="{{c.id}}" *ngFor="let c of classes">{{c.name}}</option>
+        </select>
+      </div>
+      <div class="form-group" *ngIf="message.message">
+        <label class="alert alert-{{message.type}}">
+          {{message.message}}
+        </label>
+      </div>
+      <button type="submit" [disabled]="form.invalid" class="btn btn-primary">Зберегти зміни</button>
+      <button class="btn btn-danger" (click)="changeClassCancel()">Відмінити</button>
+    </form>
+  </div>
+</div>

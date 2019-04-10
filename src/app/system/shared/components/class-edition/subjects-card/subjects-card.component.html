@@ -1,0 +1,94 @@
+<div class="classEdit-block card">
+  <div class="classEdit-block-top card-top">
+    <h4 class="classEdit-block-top-title card-top-title">
+      Предмети в системі <span></span>
+    </h4>
+  </div>
+  <div class="classEdit-block-bottom">
+    <ul class="classEdit-block-bottom-listRequest">
+      <li class="classEdit-block-bottom-listRequest-item" *ngFor="let sub of subjects">
+        <div class="classEdit-block-bottom-listRequest-item-block">
+          <span>Назва:</span>
+          <span>{{sub.name}}</span>
+        </div>
+        <div
+          class="classEdit-block-bottom-listRequest-item-block classEdit-block-bottom-listRequest-item-block_accept">
+          <span
+            class="classEdit-block-bottom-listRequest-item-block-btn classEdit-block-bottom-listRequest-item-block-btn_yes"
+            (click)="editSubject(sub.id)"
+          >Редагувати</span>
+          <span
+            class="classEdit-block-bottom-listRequest-item-block-btn classEdit-block-bottom-listRequest-item-block-btn_no"
+            (click)="deleteSubjectOpen(sub.id)"
+          >Видалити</span>
+        </div>
+      </li>
+    </ul>
+  </div>
+  <!--Edit-->
+  <div class="modalContainer" *ngIf="openEditSubject">
+    <div class="modalContainer-content">
+      <form class="modalContainer-content-form" #form="ngForm" (ngSubmit)="editSubjSubmit(form)">
+        <h4 class="modalContainer-content-form-title">
+          Редагувати предмет
+        </h4>
+        <div class="form-group" *ngIf="message.message">
+          <label class="alert alert-{{message.type}}">
+            {{message.message}}
+          </label>
+        </div>
+        <div class="form-group">
+          <div class="input-group">
+            <label class="form-label-names" for="nameSubj">
+              <span>Назва</span>
+            </label>
+            <input
+              type="text"
+              name = "nameSubject"
+              [ngModel]="checkedSubject.name"
+              required
+              minlength="4"
+              id="nameSubj"
+              class="form-control"
+              placeholder="математика(алгебра - академічний)">
+          </div>
+        </div>
+        <button
+          class="btn btn-success forn-modal-btn"
+          type = submit
+          [disabled]="form.invalid">
+          Зберегти
+        </button>
+        <button class="btn btn-warning forn-modal-btn" (click)="editSubjectCancel()">
+          Відхилити
+        </button>
+      </form>
+    </div>
+  </div>
+  <!--Delete-->
+  <div class="modalContainer" *ngIf="openDeleteSubject">
+    <div class="modalContainer-content">
+      <form class="modalContainer-content-form">
+        <h4 class="modalContainer-content-form-title">
+          Видалити предмет <span class="bgRed"> {{checkedSubject.name}} </span> ? <br>
+          Всю інформацію про цей предмет буде втрачено назавжди.
+        </h4>
+        <div class="form-group" *ngIf="message.message">
+          <label class="alert alert-{{message.type}}">
+            {{message.message}}
+          </label>
+        </div>
+        <button
+          class="btn btn-success forn-modal-btn"
+          type = submit
+          (click)="deleteSubjectSubmit()"
+        >
+          Видалити
+        </button>
+        <button class="btn btn-warning forn-modal-btn" (click)="deleteSubjectCancel()">
+          Відхилити
+        </button>
+      </form>
+    </div>
+  </div>
+</div>

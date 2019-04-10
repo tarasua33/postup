@@ -1,0 +1,63 @@
+<section class="system-content container classTeacher">
+  <!--FILTER-->
+  <div class="row">
+    <div class="system-content-filter">
+      <h4 class="system-content-filter-title">
+        Вчителі та предмети:
+      </h4>
+      <div class="system-content-filter-show">
+
+      </div>
+    </div>
+  </div>
+  <!--FILTER-->
+
+  <!--TEACHERS-->
+  <div class="teachers">
+
+    <div class="row teachers-block">
+
+      <!--TEACHER REQUEST-->
+      <div class="col-md-12" *ngIf="unconfirmedTeachers.length > 0">
+        <pst-request-teacher-card
+          [unconfirmedTeachers]="unconfirmedTeachers"
+          *ngIf="isLoad"
+          (confirm)="confirmSubmitted($event)"
+        ></pst-request-teacher-card>
+      </div>
+      <pst-loader *ngIf="!isLoad"></pst-loader>
+      <!--TEACHER REQUEST-->
+
+      <!--TEACHER LIST CLASS-->
+      <div class="col-md-12">
+        <pst-class-teacher-card
+          [teachers] = "teachers"
+          [classes] = "classes"
+          (teacherEdit) = "teacherEdit($event)"
+        ></pst-class-teacher-card>
+      </div>
+      <!--TEACHER LIST CLASS-->
+
+      <!--TEACHER LIST SUBJECT-->
+      <div class="col-md-12">
+        <pst-list-teacher-card
+          [teachers] = "teachers"
+          [subjects] = "subjects"
+          [classes] = "classes"
+        ></pst-list-teacher-card>
+      </div>
+      <!--TEACHER LIST SUBJECT-->
+
+      <!--TEACHER PARENT-->
+      <div class="col-md-12">
+        <pst-parent-teacher
+          [teachers] = "teachers"
+        ></pst-parent-teacher>
+      </div>
+      <!--TEACHER PARENT-->
+
+    </div>
+
+  </div>
+  <!--TEACHERS-->
+</section>

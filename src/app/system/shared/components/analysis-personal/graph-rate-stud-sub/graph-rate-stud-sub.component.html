@@ -1,0 +1,57 @@
+<div class="analysis-medium card">
+  <div class="analysis-medium-top card-top">
+    <h4 class="analysis-medium-top-title card-top-title">
+      <span>{{nameStudent}} </span> Графік оцінок з предмету
+    </h4>
+    <div class="analysis-success-top-filter">
+  <span class="analysis-success-top-filter-info">
+  Предмет:
+  </span>
+      <button class="analysis-success-top-filter-btn" (click)="toggleListSubjects()">
+        <span></span>
+        <span class="glyphicon glyphicon-plus"></span>
+      </button>
+      <ul
+        class="analysis-success-top-filter-listSubj showList"
+        *ngIf="openSubjects"
+      >
+        <li class="analysis-success-top-filter-listSubj-item showList-item"
+            *ngFor="let sub of subjects"
+            (click)="checkSubject(sub)"
+        >
+          {{sub.name}}
+        </li>
+      </ul>
+    </div>
+    <div class="analysis-success-top-filter">
+     <span class="analysis-success-top-filter-info">
+       Оновити:
+     </span>
+      <button class="analysis-success-top-filter-btn" (click)="updateChart()">
+        <span></span>
+        <span class="glyphicon glyphicon-refresh"></span>
+      </button>
+    </div>
+  </div>
+  <div class="analysis-medium-bottom containerChart">
+    <div class="listActiveSubjects">
+      <div class="listActiveSubjects-item" *ngFor="let s of checkedSubject">
+        <span>{{s.name}}</span>
+        <span class="glyphicon glyphicon-minus btnEdit" (click)="deleteFromSubList(s.key)"></span>
+      </div>
+    </div>
+    <ngx-charts-line-chart
+      [view]="[600, 300]"
+      [scheme]="'cool'"
+      [results]="data"
+      [gradient]="false"
+      [xAxis]="true"
+      [yAxis]="true"
+      [legend]="true"
+      [showXAxisLabel]="false"
+      [showYAxisLabel]="false"
+      [autoScale]="false"
+      >
+    </ngx-charts-line-chart>
+  </div>
+</div>

@@ -24,10 +24,14 @@
             "tsConfig": "src/tsconfig.app.json",
             "assets": [
               "src/favicon.ico",
-              "src/assets"
+              "src/assets",
+              "src/img"
             ],
             "styles": [
-              "src/styles.less"
+              "src/styles.less",
+              "node_modules/bootstrap/dist/css/bootstrap.min.css",
+              "node_modules/roboto-fontface/css/roboto/roboto-fontface.css",
+              "src/assets/app.min.css"
             ],
             "scripts": []
           },

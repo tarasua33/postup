@@ -1,0 +1,30 @@
+<div class="analysis-medium card">
+  <div class="analysis-medium-top card-top">
+    <h4 class="analysis-medium-top-title card-top-title">
+      <span class="nameStudent"> {{nameStudent}} </span> Середній бал по предметах:
+    </h4>
+    <div class="analysis-success-top-filter">
+     <span class="analysis-success-top-filter-info">
+       Оновити:
+     </span>
+      <button class="analysis-success-top-filter-btn" (click)="updateChart()">
+        <span></span>
+        <span class="glyphicon glyphicon-refresh"></span>
+      </button>
+    </div>
+  </div>
+  <div class="analysis-medium-bottom card-bottom">
+    <ngx-charts-bar-vertical
+      [view]="[600, 300]"
+      [results]="data"
+      [scheme]="'cool'"
+      [gradient]="false"
+      [xAxis]="true"
+      [yAxis]="false"
+      [showDataLabel]="true"
+      [showXAxisLabel]="true"
+      [legend]="false"
+    >
+    </ngx-charts-bar-vertical>
+  </div>
+</div>

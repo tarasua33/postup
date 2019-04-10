@@ -1,0 +1,63 @@
+<div class="teachers-block card">
+  <div class="teachers-block-top card-top">
+    <h4 class="teachers-block-top-title card-top-title">
+      Управління класним керівництвом
+    </h4>
+  </div>
+  <div class="teachers-block-bottom">
+    <ul class="teachers-block-bottom-list">
+      <li class="teachers-block-bottom-list-item" *ngFor="let t of teachers">
+        <div class="teachers-block-bottom-list-item-block">
+          <span>{{t.name}}</span>
+        </div>
+        <div class="teachers-block-bottom-list-item-block">
+          <span>{{t.phone}}</span>
+        </div>
+        <div class="teachers-block-bottom-list-item-block">
+          <span>Класний керівник: </span>
+          <span class = "namesClasses">{{getClassName(t)}}</span>
+        </div>
+        <div class="teachers-block-bottom-list-item-block teachers-block-bottom-list-item-block_add">
+          <span class="">Додати клас:</span>
+          <span
+            (click)="addClassesOpen(t.id)"
+            class="teachers-block-bottom-list-item-block-btn teachers-block-bottom-list-item-block-btn_add glyphicon glyphicon-plus"></span>
+        </div>
+      </li>
+    </ul>
+  </div>
+</div>
+<div class="modalContainer" *ngIf="openCardAddClasses">
+  <div class="modalContainer-content">
+    <form class="modalContainer-content-form" #form="ngForm" (ngSubmit)="addClassesSubmit(form)">
+      <h4 class="modalContainer-content-form-title form-modal-title">
+        Надати вчителю <span> {{checkedTeacher.name}} </span> статус Класного керівника:
+      </h4>
+      <div class="form-group" *ngFor="let c of classes">
+        <div class="input-group">
+          <label class="form-label-names" for="{{'class'+c.id}}">
+            <input
+              [ngModel] = "getStatusClass(c.id)"
+              name="{{c.id}}"
+              type="checkbox"
+              id="{{'class'+c.id}}"
+              class="form-control"
+            >
+            <span> {{c.name}} </span>
+          </label>
+        </div>
+      </div>
+
+      <button
+        [disabled]="form.invalid"
+        class="btn btn-success forn-modal-btn">
+        Надати статус
+      </button>
+      <button
+        (click)="addClassesCancel()"
+        class="btn btn-warning forn-modal-btn">
+        Відхилити
+      </button>
+    </form>
+  </div>
+</div>

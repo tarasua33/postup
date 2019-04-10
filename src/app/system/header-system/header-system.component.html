@@ -1,0 +1,26 @@
+<div class="system-header">
+  <div class="system-header-logo">
+    <h3 class="system-header-logo-title">ПОСТУП </h3>
+  </div>
+  <div
+    class="nameUser">
+    {{user.name}}
+  </div>
+  <ul class="system-header-options">
+    <li class="system-header-options-item system-header-options-item_status" *ngIf="user" (click)="toggleListTypes()">
+      <span class="correct_status">{{userTypes[statusInput]}}</span>
+      <span class="glyphicon glyphicon-menu-down" *ngIf="!openListTypes"></span>
+      <span class="glyphicon glyphicon-menu-up" *ngIf="openListTypes"></span>
+      <ul class="statusLogList" *ngIf="openListTypes">
+        <li
+          class="statusLogList-item"
+          *ngFor="let type of user.type"
+          [routerLink]="['/system/', type]"
+          [queryParams]="{'status':type}"
+        >
+          {{userTypes[type]}}
+        </li>
+      </ul>
+    </li>
+  </ul>
+</div>

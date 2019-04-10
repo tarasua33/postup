@@ -1,0 +1,97 @@
+<section class="system-content container classTeacher">
+  <!--FILTER-->
+  <div class="row">
+    <div class="system-content-filter">
+      <h4 class="system-content-filter-title">
+        Журнал оцінок:
+      </h4>
+      <div class="system-content-filter-subject">
+        <span class="system-content-filter-info">
+        Предмет:
+        </span>
+        <button class="system-content-filter-subject-btn" (click)="toggleSubjects()" *ngIf="checkedSubject">
+          <span> {{checkedSubject.name}} </span>
+          <span class="glyphicon glyphicon-menu-down"></span>
+          <ul
+            class="system-content-filter-subject-listClasses showList"
+            *ngIf="showSubjects"
+          >
+            <li
+              class="system-content-filter-subject-listClasses-item showList-item"
+              *ngFor="let subj of subjects"
+              (click)="checkSubject(subj.id)"
+            >
+              {{subj.name}}
+            </li>
+          </ul>
+        </button>
+      </div>
+      <div class="system-content-filter-subject">
+        <span class="system-content-filter-info">
+        Семестр:
+        </span>
+        <button class="system-content-filter-subject-btn" (click)="toggleSemesters()">
+          <span> {{semesters[checkedSemester]}} </span>
+          <span class="glyphicon glyphicon-menu-down"></span>
+          <ul
+            class="system-content-filter-subject-listClasses showList"
+            *ngIf="showSemesters"
+          >
+            <li
+              class="system-content-filter-subject-listClasses-item showList-item"
+              (click)="checkSemester(0)">
+              {{semesters[0]}}
+            </li>
+            <li
+              class="system-content-filter-subject-listClasses-item showList-item"
+              (click)="checkSemester(1)"
+              *ngIf="year.semesters.length === 2">
+              {{semesters[1]}}
+            </li>
+          </ul>
+        </button>
+      </div>
+      <div class="system-content-filter-show" *ngIf="statusLog !== 'parent'">
+          <span class="system-content-filter-info">
+            Клас:
+          </span>
+        <button class="system-content-filter-show-btn" (click)="toggleClasses()">
+          <span *ngIf="checkedClass"> {{checkedClass.name}} </span>
+          <span class="glyphicon glyphicon-menu-down"></span>
+          <ul
+            class="system-content-filter-show-listClasses showList"
+            *ngIf="showClasses"
+          >
+            <li
+              class="system-content-filter-show-listClasses-item showList-item"
+              *ngFor="let cls of classes"
+              (click)="checkClass(cls.id)"
+            >
+              {{cls.name}}
+            </li>
+          </ul>
+        </button>
+      </div>
+      <div class="system-content-filter-subject">
+        <button class="system-content-filter-subject-btn" *ngIf="semesters[checkedSemester]" (click)="getCorrectStudents()">
+          <span> Застосувати </span>
+          <span class="glyphicon glyphicon-ok"></span>
+        </button>
+      </div>
+    </div>
+  </div>
+  <!--FILTER-->
+  <!--LIST PUPILS REGISTER-->
+  <div class="row">
+    <pst-list-register-card
+      *ngIf="isLoad"
+      [checkedSemester] = "checkedSemester"
+      [checkedSubject] = "checkedSubject"
+      [students] = "students"
+      [nameClass] = "nameClass"
+      [statusLog] = "statusLog"
+    ></pst-list-register-card>
+    <pst-loader *ngIf="!isLoad"></pst-loader>
+  </div>
+  <!--LIST PUPILS REGISTER-->
+</section>

@@ -1,0 +1,107 @@
+<div class="classTeacher-scrollWrapper">
+  <div class="classRegisterList">
+    <h4 class="classRegisterList-title">
+      <span> Журнал Тематичних </span>
+      <span> Предмет: </span>
+      <span> {{checkedSubject.name}} / </span>
+      <span> клас: </span>
+      <span> {{nameClass}} / </span>
+      <span> семестр: </span>
+      <span> {{checkedSemester}} </span>
+    </h4>
+    <ul class="classRegisterList-list">
+      <li class="classRegisterList-list-item">
+        <div class="classRegisterList-list-item-name classRegisterList-list-item-nameT">Ім'я
+        </div>
+        <div class="classRegisterList-list-item-rating classRegisterList-list-item-ratingT ">
+          Оцінки
+        </div>
+        <div class="classRegisterList-list-item-ratingSemester classRegisterList-list-item-ratingSemesterT">
+          Семемстрова
+        </div>
+        <div class="classRegisterList-list-item-editT classRegisterList-list-item-edit">
+          Ред.
+        </div>
+      </li>
+      <li
+        class="classRegisterList-list-item classRegisterList-list-item_units"
+        *ngFor="let st of students"
+        >
+        <div *ngIf="isRegister(st); else elseBlock">
+          <div class="classRegisterList-list-item-name">{{st.name}}</div>
+          <div class="classRegisterList-list-item-rating">
+          <span class="classRegisterList-list-item-rating-number" *ngFor="let numb of st.register[getIndex(st)][getSemester()].rates">
+            {{numb}}
+          </span>
+          </div>
+          <div class="classRegisterList-list-item-ratingSemester">
+            {{st.register[getIndex(st)][getSemester()].final}}
+          </div>
+          <div class="classRegisterList-list-item-edit" *ngIf="statusLog !== 'parent'">
+            <span class="glyphicon glyphicon-pencil btnEdit btnLeft" (click)="changeRegisterOpen(st)"></span>
+            <span class="glyphicon glyphicon-plus btnEdit" (click)="addRegisterOpen(st)"></span>
+          </div>
+        </div>
+        <ng-template #elseBlock>
+          <span class="not-register"> Немає Журналу оцінок з предмету {{checkedSubject.name}} в учня {{st.name}} </span>
+        </ng-template>
+      </li>
+    </ul>
+  </div>
+</div>
+<div class="modalContainer" *ngIf="openChangeRegister">
+  <div class="modalContainer-content">
+    <h4
+      class="modalContainer-content-changeRating modalContainer-content-form-title"
+    >
+      <span> Оцінки учня </span>
+      <span> {{checkedStudent.name}} </span>
+      <span> з предмету </span>
+      <span> {{checkedSubject.name}} </span>
+    </h4>
+    <form class="modalContainer-content-changeRating" #form = "ngForm" (ngSubmit)="changeRegisterSubmit(form)">
+      <div
+        class="form-group"
+        *ngFor="let numb of checkedStudent.register[getIndex(checkedStudent)][getSemester()].rates; let i = index"
+      >
+        <div class="input-group">
+          <div class="input-group-addon">{{i + 1}}</div>
+          <input
+            class="form-control"
+            type="number"
+            placeholder="оцінка"
+            value="{{numb}}"
+            [max]="12"
+            [min]="1"
+            name="{{i}}"
+            [ngModel] = "numb"
+            required
+          >
+        </div>
+        <input type="button" value="Видалити оцінку" class="btn btn-warning" (click)="deleteNumber(i)">
+      </div>
+      <button class="btn-info btn" type="submit" [disabled]="form.invalid">Зберегти зміни</button>
+      <button class="btn-danger btn" (click)="changeRegisterCancel()">Відмінити</button>
+    </form>
+  </div>
+</div>
+<div class="modalContainer" *ngIf="openAddRegister">
+  <div class="modalContainer-content">
+    <h4
+      class="modalContainer-content-changeRating modalContainer-content-form-title"
+    >
+      <span> Додати тематичну оцінку з предмету </span>
+      <span> {{checkedSubject.name}} </span>
+      <span> до журналу учня  </span>
+      <span> {{checkedStudent.name}} </span>
+    </h4>
+    <form class="modalContainer-content-changeRating" #form = "ngForm" (ngSubmit)="addRegisterSubmit(form)">
+      <div class="form-group">
+        <label for="newValue"></label>
+        <input class="form-control" type="number" id="newValue" ngModel name="newValue" required [max]="12" [min]="1" >
+      </div>
+      <button class="btn-info btn" type="submit" [disabled]="form.invalid">Додати</button>
+      <button class="btn-danger btn" (click)="addRegisterCancel()">Відмінити</button>
+    </form>
+  </div>
+</div>

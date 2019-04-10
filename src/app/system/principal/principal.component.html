@@ -1,0 +1,87 @@
+<div class="row system-wrap-bottom">
+  <!--SIDEBAR-->
+  <aside class="system-sideBar">
+    <ul class="system-sideBar-list">
+      <li
+        routerLinkActive = "active"
+        [routerLink]="['/system','principal','list-students']"
+        class="system-sideBar-list-item">
+        <span class="glyphicon glyphicon-list"></span>
+        <span class="system-sideBar-list-item-subs">
+                                Список учнів
+                            </span>
+      </li>
+      <li
+        routerLinkActive = "active"
+        [routerLink]="['/system','principal','register']"
+        class="system-sideBar-list-item">
+        <span class="glyphicon glyphicon-list-alt"></span>
+        <span class="system-sideBar-list-item-subs">
+                                Журнал
+                            </span>
+      </li>
+      <li
+        routerLinkActive = "active"
+        [routerLink]="['/system','principal','analysis-group']"
+        class="system-sideBar-list-item">
+        <span class="glyphicon glyphicon-stats"></span>
+        <span class="system-sideBar-list-item-subs">
+                                Аналіз класу
+                            </span>
+      </li>
+      <li
+        routerLinkActive = "active"
+        [routerLink]="['/system','principal','analysis-personal']"
+        class="system-sideBar-list-item">
+        <span class="glyphicon glyphicon-signal"></span>
+        <span class="system-sideBar-list-item-subs">
+                                Аналіз особистий
+                            </span>
+      </li>
+      <li
+        routerLinkActive = "active"
+        [routerLink]="['/system','principal','parent-access']"
+        class="system-sideBar-list-item system-sideBar-list-item_info">
+        <span class="glyphicon glyphicon-bell"></span>
+        <span class="system-sideBar-list-item-subs">
+                                Доступ батьків
+                        </span>
+        <span class="system-sideBar-list-item-circle"></span>
+      </li>
+      <li
+        routerLinkActive = "active"
+        [routerLink]="['/system','principal','teachers']"
+        class="system-sideBar-list-item system-sideBar-list-item_info">
+        <span class="glyphicon glyphicon-user"></span>
+        <span class="system-sideBar-list-item-subs">
+                                Вчителі
+                        </span>
+        <span class="system-sideBar-list-item-circle"></span>
+      </li>
+      <li
+        routerLinkActive = "active"
+        [routerLink]="['/system','principal','class-edition']"
+        class="system-sideBar-list-item">
+        <span class="glyphicon glyphicon-edit"></span>
+        <span class="system-sideBar-list-item-subs">
+                                Редактор класів і предметів
+                        </span>
+      </li>
+      <li
+        routerLinkActive = "active"
+        [routerLink]="['/system','principal','years']"
+        class="system-sideBar-list-item">
+        <span class="glyphicon glyphicon-time"></span>
+        <span class="system-sideBar-list-item-subs">
+                                Навчальний рік
+                        </span>
+      </li>
+    </ul>
+  </aside>
+  <!--SIDEBAR-->
+
+  <!--CONTENT-ADMINISTRATION-->
+  <router-outlet></router-outlet>
+  <!--CONTENT-ADMINISTRATION-->
+
+</div>

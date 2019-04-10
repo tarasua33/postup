@@ -1,0 +1,66 @@
+<section class="system-content container classTeacher">
+  <!--FILTER-->
+  <div class="row">
+    <div class="system-content-filter">
+      <h4 class="system-content-filter-title">
+        Батьки:
+      </h4>
+      <div class="system-content-filter-show" *ngIf="isLoad">
+  <span class="system-content-filter-info">
+  Клас:
+  </span>
+        <button class="system-content-filter-show-btn"
+                (click)="toggleListClasses()"
+        >
+          <span>{{checkedClass.name}}</span>
+          <span class="glyphicon glyphicon-menu-down"></span>
+        </button>
+        <ul
+          class="system-content-filter-show-listClasses showList"
+          *ngIf="openListClasses"
+        >
+          <li
+            class="system-content-filter-show-listClasses-item showList-item"
+            *ngFor="let c of classes"
+            (click)="checkClass(c)"
+          >
+            {{c.name}}
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <!--FILTER-->
+
+  <!--PARENTS-->
+  <div class="parents">
+
+    <div class="row parents-block">
+
+      <!--PARENTS REQUEST TO REGISTER-->
+      <div class="col-md-12" *ngIf="notconfirmedParent.length > 0">
+        <pst-notconfirmed-parent
+          *ngIf="isLoad"
+          [notconfirmedParent]="notconfirmedParent"
+          [parent]="parent"
+        ></pst-notconfirmed-parent>
+      </div>
+      <!--PARENTS REQUEST TO REGISTER-->
+
+      <!--PARENTS REQUEST TO REGISTER-->
+      <div class="col-md-12">
+        <pst-list-parent
+          *ngIf="isLoad"
+          [students] = "students"
+          [allStudents] = "allStudents"
+          [parent] = "parent"
+        ></pst-list-parent>
+        <pst-loader *ngIf="!isLoad"></pst-loader>
+      </div>
+      <!--PARENTS REQUEST TO REGISTER-->
+
+    </div>
+
+  </div>
+  <!--PERSONAL ANALYSIS CLASS-->
+</section>

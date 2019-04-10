@@ -1,0 +1,136 @@
+<section class="system-content container classTeacher">
+  <!--FILTER-->
+  <div class="row">
+    <div class="system-content-filter">
+      <h4 class="system-content-filter-title">
+        Список учнів
+      </h4>
+      <button class=" options-btn" (click)="addStudentBtn()">
+        <span>Додати</span>
+        <span class="glyphicon glyphicon-plus"></span>
+      </button>
+      <div class="system-content-filter-show">
+  <span class="system-content-filter-info">
+  Клас:
+  </span>
+        <button class="system-content-filter-show-btn" *ngIf = "checkedClass">
+          <div class="wrapperBtn" (click)="toggleClassListBtn()">
+            <span>{{checkedClass.name}}</span>
+            <span class="glyphicon glyphicon-menu-down"></span>
+          </div>
+          <ul
+            *ngIf="openClassList"
+            class="system-content-filter-show-listClasses showList"
+          >
+            <li
+              class="system-content-filter-show-listClasses-item showList-item"
+              *ngFor="let c of classes"
+              (click)="checkThisClass(c)">
+              {{c.name}}
+            </li>
+          </ul>
+        </button>
+      </div>
+    </div>
+  </div>
+  <!--FILTER-->
+  <!--LIST PUPILS-->
+  <div class="row">
+    <pst-students-card
+      *ngIf="isLoadedStudents"
+      [students]="students"
+      [parents]="parents"
+      [checkedClass] = "checkedClass"
+      [classes] = "classes"
+      (edit)="editStudent($event)"
+    ></pst-students-card>
+    <pst-loader *ngIf="!isLoadedStudents"></pst-loader>
+  </div>
+<!--**ADD STUDENT**-->
+  <div class="modalContainer" *ngIf="openAddStudent">
+    <div class="modalContainer-content">
+      <form class="modalContainer-content-form" [formGroup]="form" (ngSubmit)="addStudentBtnSubmit()">
+        <h4 class="modalContainer-content-form-title">
+          Додати учня в <span>9 клас</span>
+        </h4>
+        <div class="form-group">
+          <label for="SurNamePupils">
+            Прізвище
+          </label>
+          <input
+            formControlName="secondName"
+            type="text"
+            id="SurNamePupils"
+            class="form-control"
+            placeholder="Стефаненеко">
+        </div>
+        <div class="form-group">
+          <label for="FirstNamePupils">
+            Ім'я
+          </label>
+          <input
+            formControlName="firstName"
+            type="text"
+            id="FirstNamePupils"
+            class="form-control"
+            placeholder="Стефанія">
+        </div>
+        <div class="form-group">
+          <label for="namePupils">
+            По батькові
+          </label>
+          <input
+            formControlName="middleName"
+            type="text"
+            id="namePupils"
+            class="form-control"
+            placeholder="Степанівна">
+        </div>
+        <div class="form-group">
+          <label for="dateBirth">
+            Дата народження
+          </label>
+          <input
+            formControlName="birthday"
+            type="date"
+            id="dateBirth"
+            class="form-control">
+        </div>
+        <div class="form-group">
+          <label for="homeTown">
+            Місце проживання
+          </label>
+          <input
+            formControlName="place"
+            type="text"
+            id="homeTown"
+            class="form-control"
+            placeholder="Жмеринка">
+        </div>
+        <div class="form-group" formArrayName="phones">
+          <label for="contacts">
+            Контакти
+          </label>
+          <div *ngFor="let p of form.controls['phones'].controls; let i = index">
+            <input
+              formControlName="{{i}}"
+              type="number"
+              id="contacts"
+              class="form-control"
+              placeholder="099 99 99 999">
+          </div>
+        </div>
+        <input
+          (click)="addPhone()"
+          type="button"
+          value="Додати номер"
+          class="form-control modalContainer-content-form-addContact"
+        >
+        <hr>
+        <button class="btn btn-primary" type="submit" [disabled]="form.invalid">Додати</button>
+        <button class="btn btn-danger" (click)="addStudentBtnCancel()">Відхилити</button>
+      </form>
+    </div>
+  </div>
+  <!--LIST PUPILS-->
+</section>

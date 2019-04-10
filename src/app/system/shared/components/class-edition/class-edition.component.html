@@ -1,0 +1,140 @@
+<section class="system-content container classTeacher">
+  <!--FILTER-->
+  <div class="row">
+    <div class="system-content-filter">
+      <h4 class="system-content-filter-title">
+        Редактор класів та предметів <span *ngIf="year"> за {{year.name}} </span> :
+      </h4>
+      <button class="options-btn" (click)="addSubjectOpen()">
+        <span>Додати Предмет</span>
+        <span class="glyphicon glyphicon-plus-sign"></span>
+      </button>
+      <button class="options-btn" (click)="addClassOpen()">
+        <span>Додати Клас</span>
+        <span class="glyphicon glyphicon-plus"></span>
+      </button>
+    </div>
+  </div>
+  <div class="modalContainer" *ngIf="openAddClasses">
+    <div class="modalContainer-content">
+      <form class="modalContainer-content-form" #form="ngForm" (ngSubmit)="addClassSubmit(form)">
+        <h4 class="modalContainer-content-form-title">
+          Додати клас
+        </h4>
+        <div class="form-group" *ngIf="message.message">
+          <label class="alert alert-{{message.type}}">
+            {{message.message}}
+          </label>
+        </div>
+        <div class="form-group">
+          <div class="input-group">
+            <label class="form-label-names" for="nameClass">
+              <span>Назва</span>
+            </label>
+            <input
+              ngModel
+              name="nameClass"
+              type="text"
+              id="nameClass"
+              required
+              minlength="3"
+              class="form-control"
+              placeholder="9 - Б">
+          </div>
+        </div>
+        <h4 class="modalContainer-content-form-title">
+          Добавити / відмінити журнали з предметів:
+        </h4>
+        <div class="form-group" *ngFor="let s of subjects">
+          <div class="input-group">
+            <label class="form-label-names" for="subject-{{s.id}}">
+              <input type="checkbox" id="subject-{{s.id}}" name="{{s.key}}" class="" ngModel>
+              <span>{{s.name}}</span>
+            </label>
+          </div>
+        </div>
+
+        <button
+          [disabled]="form.invalid"
+          type="submit"
+          class="btn btn-success forn-modal-btn">
+          Зберегти
+        </button>
+        <button
+          (click)="addClassCancel()"
+          class="btn btn-warning forn-modal-btn">
+          Відхилити
+        </button>
+      </form>
+    </div>
+  </div>
+  <div class="modalContainer" *ngIf="openAddSubject">
+    <div class="modalContainer-content">
+      <form class="modalContainer-content-form" #formSubj="ngForm" (ngSubmit)="addSubjectSubmit(formSubj)">
+        <h4 class="modalContainer-content-form-title">
+          Додати предмет
+        </h4>
+        <div class="form-group" *ngIf="message.message">
+          <label class="alert alert-{{message.type}}">
+            {{message.message}}
+          </label>
+        </div>
+        <div class="form-group">
+          <div class="input-group">
+            <label class="form-label-names" for="nameClass">
+              <span>Назва</span>
+            </label>
+            <input
+              ngModel
+              name="nameSubject"
+              type="text"
+              id="nameSubject"
+              required
+              minlength="3"
+              class="form-control"
+              placeholder="Алгебра - академічний">
+          </div>
+        </div>
+
+        <button
+          [disabled]="formSubj.invalid"
+          type="submit"
+          class="btn btn-success forn-modal-btn">
+          Зберегти
+        </button>
+        <button
+          (click)="addSubjectCancel()"
+          class="btn btn-warning forn-modal-btn">
+          Відхилити
+        </button>
+      </form>
+    </div>
+  </div>
+  <!--FILTER-->
+
+  <!--EDIT CLASS-->
+  <div class="classEdit">
+
+    <div class="row classEdit-block">
+
+      <!--CLASS EDITION-->
+      <div class="col-md-12" *ngIf="year">
+        <pst-classes-card
+          [year]="year"
+          (edited)="editedClass($event)"
+          [classes]="classes"
+          [subjects]="subjects"></pst-classes-card>
+      </div>
+      <pst-loader *ngIf="!year"></pst-loader>
+      <!--CLASS EDITION-->
+      <!--CLASS EDITION-->
+      <div class="col-md-12" *ngIf="year">
+        <pst-subjects-card [subjects]="subjects" (edited)="editedSubject($event)"></pst-subjects-card>
+      </div>
+      <!--CLASS EDITION-->
+
+    </div>
+
+  </div>
+  <!--EDIT CLASS-->
+</section>

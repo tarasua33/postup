@@ -1,0 +1,67 @@
+<header class="headerPage">
+  <!-- start header.tmpl.html-->
+  <div class="headerSystem">
+    <div class="headerSystem-topWrapper">
+      <div class="container">
+        <div class="row">
+          <div class="headerSystem-top">
+            <div class="headerSystem-top-search">
+              <div class="logBtn">
+
+              </div>
+            </div>
+            <img src="img/schoolLogo.png" alt="Логотип Жуківської школи" class="headerSystem-top-logo">
+            <div class="headerSystem-top-log">
+              <a
+                *ngIf="!user"
+                [routerLink]="['/news/login']"
+                class="headerSystem-top-log-logBtn logBtn">
+                <span class="iconsStandard glyphicon glyphicon-log-in"></span>
+                <span class="logBtn-logBtnSpan">Увійти</span>
+              </a>
+              <div *ngIf="user" (click)="out()" class="headerSystem-top-log-logBtn logBtn">
+                <span class="iconsStandard glyphicon glyphicon glyphicon-log-out"></span>
+                <span class="logBtn-logBtnSpan">Вийти</span>
+              </div>
+              <a *ngIf="!user" [routerLink]="['/news/registration']" class="headerSystem-top-log-logBtn logBtn">
+                <span class="iconsStandard glyphicon glyphicon-file"></span>
+                <span class="logBtn-logBtnSpan">Реєстрація</span>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="container">
+      <div class="row">
+        <div class="headerSystem-bottom">
+          <ul class="headerSystem-bottom-menu">
+            <li class="headerSystem-bottom-menu-item menu-item">
+              <a [routerLink]="['/news']" class="headerSystem-bottom-menu-item-link">
+                Домашня
+              </a>
+            </li>
+            <li class="headerSystem-bottom-menu-item menu-item">
+              <a
+                [routerLink]="['/system/teacher']"
+                [queryParams]="{'status':'teacher'}"
+                class="headerSystem-bottom-menu-item-link">
+                Вчителям
+              </a>
+            </li>
+            <li class="headerSystem-bottom-menu-item menu-item">
+              <a
+                [routerLink]="['/system/parent']"
+                [queryParams]="{'status':'parent'}"
+                class="headerSystem-bottom-menu-item-link">
+                Батькам
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- end header.tmpl.html-->
+</header>

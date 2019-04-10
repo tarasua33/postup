@@ -1,0 +1,79 @@
+<div class="parents-block card">
+  <div class="parents-block-top card-top">
+    <h4 class="parents-block-top-title card-top-title">
+      Управління обліковими записами вчителів:
+    </h4>
+  </div>
+  <div class="parents-block-bottom">
+    <ul class="parents-block-bottom-listRequest">
+      <li class="parents-block-bottom-listRequest-item" *ngFor="let t of teachers">
+        <div class="parents-block-bottom-listRequest-item-block">
+          <span>{{t.name}}</span>
+        </div>
+        <div class="parents-block-bottom-listRequest-item-block">
+          <span>{{t.phone}}</span>
+        </div>
+        <div
+          class="parents-block-bottom-listRequest-item-block parents-block-bottom-listRequest-item-block_accept">
+          <span
+            *ngIf="checkStatusParent(t)"
+            class="parents-block-bottom-listRequest-item-block-btn parents-block-bottom-listRequest-item-block-btn_yes "
+            (click)="addParentStatusOpen(t)"
+          >
+            <span class="glyphicon glyphicon-bell"></span> Надати статус Батько/Матір
+          </span>
+          <span *ngIf="!checkStatusParent(t)">Статус Батько/Матів додано</span>
+          <span
+            *ngIf="t.type.indexOf('principal') === -1"
+            class="parents-block-bottom-listRequest-item-block-btn parents-block-bottom-listRequest-item-block-btn_no "
+            (click)="deleteUserOpen(t)"
+          >
+            <span class="glyphicon glyphicon-trash"></span> Видалити обліковий запис </span>
+        </div>
+      </li>
+    </ul>
+  </div>
+</div>
+
+<!--STATUS PARENT-->
+<div class="modalContainer" *ngIf="openAddStatusParent">
+  <div class="modalContainer-content">
+    <form class="modalContainer-content-form">
+      <h4 class="modalContainer-content-form-title">
+        Підтвердіть надання статусу 'Батько/Мати' <span class="bgRed"> {{checkedTeacher.name}} </span> ? <br>
+      </h4>
+      <button
+        class="btn btn-success forn-modal-btn"
+        type = submit
+        (click)="addParentStatusSubmit()"
+      >
+        Підтвердити
+      </button>
+      <button class="btn btn-warning forn-modal-btn" (click)="addParentStatusCancel()">
+        Ще подумаю
+      </button>
+    </form>
+  </div>
+</div>
+
+<!--DELETE ACCOUNT-->
+<div class="modalContainer" *ngIf="openDeleteUser">
+  <div class="modalContainer-content">
+    <form class="modalContainer-content-form">
+      <h4 class="modalContainer-content-form-title">
+        Підтвердіть видалення <span class="bgRed"> {{checkedTeacher.name}} </span> ? <br>
+      </h4>
+      <button
+        class="btn btn-success forn-modal-btn"
+        type = submit
+        (click)="deleteUserSubmit()"
+      >
+        Підтвердити
+      </button>
+      <button class="btn btn-warning forn-modal-btn" (click)="deleteUserCancel()">
+        Ще подумаю
+      </button>
+    </form>
+  </div>
+</div>
+

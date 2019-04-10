@@ -1,0 +1,110 @@
+<div class="classEdit-block card">
+  <div class="classEdit-block-top card-top">
+    <h4 class="classEdit-block-top-title card-top-title">
+      Наявні класи в системі <span *ngIf="year"> за {{year.name}} </span> навчаьний рік
+    </h4>
+  </div>
+  <div class="classEdit-block-bottom">
+    <ul class="classEdit-block-bottom-listRequest">
+      <li class="classEdit-block-bottom-listRequest-item" *ngFor="let cl of correctClasses">
+        <div class="classEdit-block-bottom-listRequest-item-block">
+          <span>Назва: </span>
+          <span> {{cl.name}}</span>
+        </div>
+        <div
+          class="classEdit-block-bottom-listRequest-item-block classEdit-block-bottom-listRequest-item-block_accept">
+          <span
+            class="classEdit-block-bottom-listRequest-item-block-btn classEdit-block-bottom-listRequest-item-block-btn_yes"
+            (click)="editClass(cl.id)"
+          >Редагувати</span>
+          <span
+            class="classEdit-block-bottom-listRequest-item-block-btn classEdit-block-bottom-listRequest-item-block-btn_no"
+            (click)="deleteClassOpen(cl.id)"
+          >Видалити</span>
+        </div>
+      </li>
+    </ul>
+  </div>
+  <!--Edit-->
+  <div class="modalContainer" *ngIf="openEditClasses">
+    <div class="modalContainer-content">
+      <form class="modalContainer-content-form" #form="ngForm" (ngSubmit)="editClassSubmit(form)">
+        <h4 class="modalContainer-content-form-title">
+          Редагувати клас {{checkedClass.name}}
+        </h4>
+        <div class="form-group" *ngIf="message.message">
+          <label class="alert alert-{{message.type}}">
+            {{message.message}}
+          </label>
+        </div>
+        <div class="form-group">
+          <div class="input-group">
+            <label class="form-label-names" for="nameClass">
+              <span>Нова назва</span>
+            </label>
+            <input
+              [ngModel] = "checkedClass.name"
+              name="nameClass"
+              type="text"
+              id="nameClass"
+              required
+              minlength="3"
+              class="form-control"
+              placeholder="9 - Б">
+          </div>
+        </div>
+        <h4 class="modalContainer-content-form-title">
+          Добавити / відмінити журнали з предметів:
+        </h4>
+        <div class="form-group" *ngFor="let s of subjects">
+          <div class="input-group">
+            <label class="form-label-names" for="subject-{{s.id}}">
+              <input type="checkbox" id="subject-{{s.id}}" name="{{s.key}}" class="" [ngModel]="isIncludeSubject(s.key)">
+              <span>{{s.name}}</span>
+            </label>
+          </div>
+        </div>
+
+        <button
+          [disabled]="form.invalid"
+          *ngIf="isFinal"
+          type="submit"
+          class="btn btn-success forn-modal-btn">
+          Зберегти
+        </button>
+        <button
+          (click)="editCancelClass()"
+          *ngIf="isFinal"
+          class="btn btn-warning forn-modal-btn">
+          Відхилити
+        </button>
+      </form>
+    </div>
+  </div>
+  <!--Delete-->
+  <div class="modalContainer" *ngIf="openDeleteClass">
+    <div class="modalContainer-content">
+      <form class="modalContainer-content-form">
+        <h4 class="modalContainer-content-form-title">
+          Видалити клас <span class="bgRed"> {{checkedClass.name}} </span> ? <br>
+          Всю інформацію про цей клас буде втрачено назавжди.
+        </h4>
+        <div class="form-group" *ngIf="message.message">
+          <label class="alert alert-{{message.type}}">
+            {{message.message}}
+          </label>
+        </div>
+        <button
+          class="btn btn-success forn-modal-btn"
+          type = submit
+          (click)="deleteClassSubmit()"
+        >
+          Видалити
+        </button>
+        <button class="btn btn-warning forn-modal-btn" (click)="deleteClassCancel()">
+          Відхилити
+        </button>
+      </form>
+    </div>
+  </div>
+</div>
